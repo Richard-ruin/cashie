@@ -1,0 +1,45 @@
+{
+  "appTitle": "Cashie",
+  "cashier": "Kasir",
+  "items": "Barang",
+  "history": "Riwayat",
+  "statistics": "Statistik",
+  "settings": "Pengaturan",
+  "notes": "Catatan",
+  "membership": "Keanggotaan",
+  "purchaseOrder": "Pembelian",
+  "discount": "Diskon",
+  "debts": "Hutang",
+  "data": "Data",
+  "language": "Bahasa",
+  "theme": "Tema",
+  "about": "Tentang",
+  "appLanguage": "Bahasa Aplikasi",
+  "statisticsPage": "Statistics Page",
+  "itemsPage": "Items Page",
+  "historyPage": "History Page",
+  "cashierPage": "Cashier Page",
+  "statisticsPage": "Halaman Statistik",
+  "itemsPage": "Halaman Barang",
+  "historyPage": "Halaman Riwayat",
+  "cashierPage": "Halaman Kasir",
+  "@appLanguage": {
+    "description": "Judul untuk halaman pemilihan bahasa"
+  },
+  "defaultLanguage": "Default",
+  "@defaultLanguage": {
+    "description": "Label untuk opsi bahasa default"
+  },
+  "englishLanguage": "Inggris",
+  "@englishLanguage": {
+    "description": "Label untuk opsi bahasa Inggris"
+  },
+  "indonesianLanguage": "Indonesia",
+  "@indonesianLanguage": {
+    "description": "Label untuk opsi bahasa Indonesia"
+  },
+  "chineseLanguage": "Cina",
+  "@chineseLanguage": {
+    "description": "Label untuk opsi bahasa Cina"
+  }
+}

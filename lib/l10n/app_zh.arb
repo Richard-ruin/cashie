@@ -1,0 +1,41 @@
+{
+    "appTitle": "Cashie",
+    "cashier": "收银员",
+    "items": "项目",
+    "history": "历史",
+    "statistics": "统计",
+    "settings": "设置",
+    "notes": "笔记",
+    "membership": "会员资格",
+    "purchaseOrder": "采购订单",
+    "discount": "折扣",
+    "debts": "债务",
+    "data": "数据",
+    "language": "语言",
+    "theme": "主题",
+    "about": "关于",
+    "appLanguage": "应用语言",
+    "statisticsPage": "统计页面",
+  "itemsPage": "商品页面",
+  "historyPage": "历史页面",
+  "cashierPage": "收银页面",
+    "@appLanguage": {
+      "description": "语言选择页面的标题"
+    },
+    "defaultLanguage": "默认",
+    "@defaultLanguage": {
+      "description": "默认语言选项的标签"
+    },
+    "englishLanguage": "英语",
+    "@englishLanguage": {
+      "description": "英语语言选项的标签"
+    },
+    "indonesianLanguage": "印尼语",
+    "@indonesianLanguage": {
+      "description": "印尼语语言选项的标签"
+    },
+    "chineseLanguage": "中文",
+    "@chineseLanguage": {
+      "description": "中文语言选项的标签"
+    }
+  }
