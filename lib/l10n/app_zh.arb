@@ -19,6 +19,8 @@
   "itemsPage": "商品页面",
   "historyPage": "历史页面",
   "cashierPage": "收银页面",
+  "lightTheme": "浅色主题",
+  "darkTheme": "深色主题",
     "@appLanguage": {
       "description": "语言选择页面的标题"
     },

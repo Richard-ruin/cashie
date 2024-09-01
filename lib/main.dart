@@ -11,11 +11,17 @@ import 'package:cashie/pages/settings/settings.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:cashie/l10n/l10n.dart';
 import 'package:cashie/providers/language_provider.dart';
+import 'package:cashie/providers/theme_provider.dart';
+import 'package:cashie/themes/light_theme.dart';
+import 'package:cashie/themes/dark_theme.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => LanguageProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => LanguageProvider()),
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+      ],
       child: MyApp(),
     ),
   );
@@ -24,8 +30,8 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Consumer<LanguageProvider>(
-      builder: (context, languageProvider, _) {
+    return Consumer2<LanguageProvider, ThemeProvider>(
+      builder: (context, languageProvider, themeProvider, _) {
         return MaterialApp(
           title: 'Cashie',
           localizationsDelegates: [
@@ -36,9 +42,9 @@ class MyApp extends StatelessWidget {
           ],
           supportedLocales: L10n.all,
           locale: languageProvider.currentLocale,
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
+          theme: lightTheme,
+          darkTheme: darkTheme,
+          themeMode: themeProvider.themeMode,
           home: SplashScreen(),
           routes: {
             '/home': (context) => HomeScreen(),
@@ -67,27 +73,58 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDarkMode = themeProvider.themeMode == ThemeMode.dark;
+
     return Scaffold(
       body: _pages[_selectedIndex],
       bottomNavigationBar: CurvedNavigationBar(
         index: _selectedIndex,
         items: <Widget>[
-          Icon(Icons.point_of_sale, size: 30),
-          Icon(Icons.list, size: 30),
-          Icon(Icons.history, size: 30),
-          Icon(Icons.bar_chart, size: 30),
-          Icon(Icons.settings, size: 30),
+          Icon(Icons.point_of_sale,
+              size: 30,
+              color: isDarkMode
+                  ? darkTheme.iconTheme.color ?? Colors.white
+                  : null),
+          Icon(Icons.list,
+              size: 30,
+              color: isDarkMode
+                  ? darkTheme.iconTheme.color ?? Colors.white
+                  : null),
+          Icon(Icons.history,
+              size: 30,
+              color: isDarkMode
+                  ? darkTheme.iconTheme.color ?? Colors.white
+                  : null),
+          Icon(Icons.bar_chart,
+              size: 30,
+              color: isDarkMode
+                  ? darkTheme.iconTheme.color ?? Colors.white
+                  : null),
+          Icon(Icons.settings,
+              size: 30,
+              color: isDarkMode
+                  ? darkTheme.iconTheme.color ?? Colors.white
+                  : null),
         ],
-        color: Colors.white,
-        buttonBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
-        backgroundColor: Colors.blueAccent,
+        color: isDarkMode
+            ? darkTheme.bottomNavigationBarTheme.backgroundColor ??
+                Color(0xFF2B2B2B)
+            : Colors.white,
+        buttonBackgroundColor: isDarkMode
+            ? darkTheme.bottomNavigationBarTheme.selectedItemColor ??
+                Color(0xFF424242)
+            : Colors.white,
+        backgroundColor: isDarkMode
+            ? darkTheme.scaffoldBackgroundColor ?? Color(0xFF121212)
+            : Colors.blueAccent,
         onTap: (index) {
           setState(() {
             _selectedIndex = index;
           });
         },
         animationCurve: Curves.easeInOut,
-        animationDuration: Duration(milliseconds: 3000),
+        animationDuration: Duration(milliseconds: 300),
       ),
     );
   }

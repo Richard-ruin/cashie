@@ -15,14 +15,12 @@
   "theme": "Tema",
   "about": "Tentang",
   "appLanguage": "Bahasa Aplikasi",
-  "statisticsPage": "Statistics Page",
-  "itemsPage": "Items Page",
-  "historyPage": "History Page",
-  "cashierPage": "Cashier Page",
   "statisticsPage": "Halaman Statistik",
   "itemsPage": "Halaman Barang",
   "historyPage": "Halaman Riwayat",
   "cashierPage": "Halaman Kasir",
+  "lightTheme": "Tema Terang",
+  "darkTheme": "Tema Gelap",
   "@appLanguage": {
     "description": "Judul untuk halaman pemilihan bahasa"
   },

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:cashie/providers/theme_provider.dart';
 
 class SettingsTile extends StatelessWidget {
   final IconData icon;
@@ -14,10 +16,14 @@ class SettingsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDarkMode = themeProvider.themeMode == ThemeMode.dark;
+
     return ListTile(
       leading: Icon(
         icon,
-        color: const Color.fromARGB(190, 10, 54, 173),
+        color:
+            isDarkMode ? Color(0xFFE4E6EB) : Color.fromARGB(190, 10, 54, 173),
       ),
       title: Text(
         title,
@@ -25,12 +31,13 @@ class SettingsTile extends StatelessWidget {
           fontFamily: 'Roboto',
           fontSize: 18,
           fontWeight: FontWeight.w500,
+          color: isDarkMode ? Colors.white : Colors.black,
         ),
       ),
       trailing: Icon(
         Icons.arrow_forward_ios,
         size: 16,
-        color: Colors.lightBlue,
+        color: isDarkMode ? Colors.white : Colors.lightBlue,
       ),
       onTap: onTap,
     );
