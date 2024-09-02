@@ -14,7 +14,7 @@ class PurchaseOrder extends HiveObject {
   final String POCompany;
 
   @HiveField(3)
-  final String imagePath; // Path untuk menyimpan gambar
+  final String imagePath;
 
   PurchaseOrder({
     required this.POId,
