@@ -11,16 +11,19 @@ import 'package:cashie/pages/settings/settings.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:cashie/l10n/l10n.dart';
 import 'package:cashie/providers/language_provider.dart';
-import 'package:cashie/providers/theme_provider.dart';
-import 'package:cashie/themes/light_theme.dart';
-import 'package:cashie/themes/dark_theme.dart';
+import 'package:cashie/providers/cashie_theme_provider.dart';
+import 'providers/theme_mode_provider.dart';
 
 void main() {
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => LanguageProvider()),
-        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(
+            create: (_) =>
+                CashieThemeController()), // Update with CashieThemeController
+        ChangeNotifierProvider(
+            create: (_) => ThemeModeProvider()), // Added for ThemeMode
       ],
       child: MyApp(),
     ),
@@ -30,8 +33,10 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Consumer2<LanguageProvider, ThemeProvider>(
-      builder: (context, languageProvider, themeProvider, _) {
+    return Consumer3<LanguageProvider, CashieThemeController,
+        ThemeModeProvider>(
+      builder:
+          (context, languageProvider, themeController, themeModeProvider, _) {
         return MaterialApp(
           title: 'Cashie',
           localizationsDelegates: [
@@ -42,9 +47,9 @@ class MyApp extends StatelessWidget {
           ],
           supportedLocales: L10n.all,
           locale: languageProvider.currentLocale,
-          theme: lightTheme,
-          darkTheme: darkTheme,
-          themeMode: themeProvider.themeMode,
+          theme: CashieTheme.getTheme(themeController.appTheme),
+          darkTheme: CashieTheme.getTheme(themeController.appTheme),
+          themeMode: themeModeProvider.themeMode,
           home: SplashScreen(),
           routes: {
             '/home': (context) => HomeScreen(),
@@ -73,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
+    final themeProvider = Provider.of<ThemeModeProvider>(context);
     final isDarkMode = themeProvider.themeMode == ThemeMode.dark;
 
     return Scaffold(
@@ -84,39 +89,68 @@ class _HomeScreenState extends State<HomeScreen> {
           Icon(Icons.point_of_sale,
               size: 30,
               color: isDarkMode
-                  ? darkTheme.iconTheme.color ?? Colors.white
+                  ? CashieTheme.getTheme(
+                              context.watch<CashieThemeController>().appTheme)
+                          .iconTheme
+                          .color ??
+                      Colors.white
                   : null),
           Icon(Icons.list,
               size: 30,
               color: isDarkMode
-                  ? darkTheme.iconTheme.color ?? Colors.white
+                  ? CashieTheme.getTheme(
+                              context.watch<CashieThemeController>().appTheme)
+                          .iconTheme
+                          .color ??
+                      Colors.white
                   : null),
           Icon(Icons.history,
               size: 30,
               color: isDarkMode
-                  ? darkTheme.iconTheme.color ?? Colors.white
+                  ? CashieTheme.getTheme(
+                              context.watch<CashieThemeController>().appTheme)
+                          .iconTheme
+                          .color ??
+                      Colors.white
                   : null),
           Icon(Icons.bar_chart,
               size: 30,
               color: isDarkMode
-                  ? darkTheme.iconTheme.color ?? Colors.white
+                  ? CashieTheme.getTheme(
+                              context.watch<CashieThemeController>().appTheme)
+                          .iconTheme
+                          .color ??
+                      Colors.white
                   : null),
           Icon(Icons.settings,
               size: 30,
               color: isDarkMode
-                  ? darkTheme.iconTheme.color ?? Colors.white
+                  ? CashieTheme.getTheme(
+                              context.watch<CashieThemeController>().appTheme)
+                          .iconTheme
+                          .color ??
+                      Colors.white
                   : null),
         ],
         color: isDarkMode
-            ? darkTheme.bottomNavigationBarTheme.backgroundColor ??
+            ? CashieTheme.getTheme(
+                        context.watch<CashieThemeController>().appTheme)
+                    .bottomNavigationBarTheme
+                    .backgroundColor ??
                 Color(0xFF2B2B2B)
             : Colors.white,
         buttonBackgroundColor: isDarkMode
-            ? darkTheme.bottomNavigationBarTheme.selectedItemColor ??
+            ? CashieTheme.getTheme(
+                        context.watch<CashieThemeController>().appTheme)
+                    .bottomNavigationBarTheme
+                    .selectedItemColor ??
                 Color(0xFF424242)
             : Colors.white,
         backgroundColor: isDarkMode
-            ? darkTheme.scaffoldBackgroundColor ?? Color(0xFF121212)
+            ? CashieTheme.getTheme(
+                        context.watch<CashieThemeController>().appTheme)
+                    .scaffoldBackgroundColor ??
+                Color(0xFF121212)
             : Colors.blueAccent,
         onTap: (index) {
           setState(() {

@@ -11,7 +11,7 @@ import 'package:cashie/pages/settings/language.dart';
 import 'package:cashie/pages/settings/theme.dart';
 import 'package:cashie/pages/settings/about.dart';
 import "package:provider/provider.dart";
-import 'package:cashie/providers/theme_provider.dart';
+import 'package:cashie/providers/cashie_theme_provider.dart';
 
 class SettingsPage extends StatelessWidget {
   @override

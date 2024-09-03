@@ -1,67 +1,100 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:cashie/providers/theme_provider.dart';
+import 'package:cashie/providers/cashie_theme_provider.dart';
+import 'package:cashie/providers/theme_mode_provider.dart';
 
 class ThemePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final cashieThemeController = Provider.of<CashieThemeController>(context);
+    final themeModeProvider = Provider.of<ThemeModeProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:
-            Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
-                ? Color(0xFF2B2B2B)
-                : Colors.blue,
         title: Text(
           AppLocalizations.of(context)!.theme,
           style: TextStyle(
             fontFamily: 'Roboto',
             fontSize: 24,
             fontWeight: FontWeight.bold,
-            color: Colors.white,
           ),
         ),
         centerTitle: true,
       ),
-      body: ListView(
-        children: [
-          ListTile(
-            title: Text(
-              AppLocalizations.of(context)!.lightTheme,
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            CupertinoSegmentedControl<ThemeMode>(
+              groupValue: themeModeProvider.themeMode,
+              onValueChanged: (ThemeMode mode) {
+                themeModeProvider.toggleThemeMode(mode);
+              },
+              children: {
+                ThemeMode.system: Text(AppLocalizations.of(context)!.system),
+                ThemeMode.light: Text(AppLocalizations.of(context)!.lightTheme),
+                ThemeMode.dark: Text(AppLocalizations.of(context)!.darkTheme),
+              },
+            ),
+            SizedBox(height: 16),
+            Text(
+              AppLocalizations.of(context)!.colorScheme,
               style: TextStyle(
                 fontFamily: 'Roboto',
                 fontSize: 18,
-                color: isDarkMode ? Colors.white : Colors.black,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            trailing:
-                Provider.of<ThemeProvider>(context).themeMode == ThemeMode.light
-                    ? Icon(Icons.check, color: Colors.blue)
-                    : null,
-            onTap: () {
-              Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
-            },
-          ),
-          ListTile(
-            title: Text(
-              AppLocalizations.of(context)!.darkTheme,
-              style: TextStyle(
-                fontFamily: 'Roboto',
-                fontSize: 18,
-                color: isDarkMode ? Colors.white : Colors.black,
+            Expanded(
+              child: ListView(
+                children: [
+                  ListTile(
+                    title: Text(
+                      "Default Color Scheme",
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontSize: 16,
+                      ),
+                    ),
+                    trailing:
+                        cashieThemeController.appTheme == 'DefaultColorScheme'
+                            ? Icon(
+                                Icons.check,
+                                color: Theme.of(context).primaryColor,
+                              )
+                            : null,
+                    onTap: () {
+                      cashieThemeController.updateTheme('DefaultColorScheme');
+                    },
+                  ),
+                  ListTile(
+                    title: Text(
+                      "Green Apple Color Scheme",
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontSize: 16,
+                      ),
+                    ),
+                    trailing: cashieThemeController.appTheme ==
+                            'GreenAppleColorScheme'
+                        ? Icon(
+                            Icons.check,
+                            color: Theme.of(context).primaryColor,
+                          )
+                        : null,
+                    onTap: () {
+                      cashieThemeController
+                          .updateTheme('GreenAppleColorScheme');
+                    },
+                  ),
+                ],
               ),
             ),
-            trailing:
-                Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
-                    ? Icon(Icons.check, color: Colors.blue)
-                    : null,
-            onTap: () {
-              Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
-            },
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

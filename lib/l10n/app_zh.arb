@@ -21,6 +21,8 @@
   "cashierPage": "收银页面",
   "lightTheme": "浅色主题",
   "darkTheme": "深色主题",
+  "system": "系统",
+  "colorScheme": "配色方案",
     "@appLanguage": {
       "description": "语言选择页面的标题"
     },

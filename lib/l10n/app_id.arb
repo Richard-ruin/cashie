@@ -21,6 +21,8 @@
   "cashierPage": "Halaman Kasir",
   "lightTheme": "Tema Terang",
   "darkTheme": "Tema Gelap",
+  "system": "Sistem",
+  "colorScheme": "Skema Warna",
   "@appLanguage": {
     "description": "Judul untuk halaman pemilihan bahasa"
   },
