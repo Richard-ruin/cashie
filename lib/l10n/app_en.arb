@@ -22,6 +22,7 @@
   "darkTheme": "Dark Theme",
   "cashierPage": "Cashier Page",
   "system": "System",
+  "calculator":"Calculator",
   "colorScheme": "Color Scheme",
   "@appLanguage": {
     "description": "Title for the language selection page"

@@ -10,12 +10,14 @@ import 'package:cashie/pages/settings/data.dart';
 import 'package:cashie/pages/settings/language.dart';
 import 'package:cashie/pages/settings/theme.dart';
 import 'package:cashie/pages/settings/about.dart';
-import "package:provider/provider.dart";
-import 'package:cashie/providers/theme_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:cashie/providers/settings_page_provider.dart';
 
 class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final settingsProvider = Provider.of<SettingsPageProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
@@ -37,7 +39,11 @@ class SettingsPage extends StatelessWidget {
             title: AppLocalizations.of(context)!.notes,
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => NotesPage()),
+              MaterialPageRoute(
+                  builder: (context) => NotesPage(
+                        initialNotes: settingsProvider.notes,
+                        onNotesChanged: settingsProvider.setNotes,
+                      )),
             ),
           ),
           SettingsTile(
@@ -45,7 +51,11 @@ class SettingsPage extends StatelessWidget {
             title: AppLocalizations.of(context)!.membership,
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => MembershipPage()),
+              MaterialPageRoute(
+                  builder: (context) => MembershipPage(
+                        initialMembership: settingsProvider.membership,
+                        onMembershipChanged: settingsProvider.setMembership,
+                      )),
             ),
           ),
           SettingsTile(
@@ -53,7 +63,12 @@ class SettingsPage extends StatelessWidget {
             title: AppLocalizations.of(context)!.purchaseOrder,
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => PurchaseOrderPage()),
+              MaterialPageRoute(
+                  builder: (context) => PurchaseOrderPage(
+                        initialPurchaseOrder: settingsProvider.purchaseOrder,
+                        onPurchaseOrderChanged:
+                            settingsProvider.setPurchaseOrder,
+                      )),
             ),
           ),
           SettingsTile(
@@ -61,7 +76,11 @@ class SettingsPage extends StatelessWidget {
             title: AppLocalizations.of(context)!.discount,
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => DiscountPage()),
+              MaterialPageRoute(
+                  builder: (context) => DiscountPage(
+                        initialDiscount: settingsProvider.discount,
+                        onDiscountChanged: settingsProvider.setDiscount,
+                      )),
             ),
           ),
           SettingsTile(
@@ -69,7 +88,11 @@ class SettingsPage extends StatelessWidget {
             title: AppLocalizations.of(context)!.debts,
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => DebtsPage()),
+              MaterialPageRoute(
+                  builder: (context) => DebtsPage(
+                        initialDebts: settingsProvider.debts,
+                        onDebtsChanged: settingsProvider.setDebts,
+                      )),
             ),
           ),
           SettingsTile(
@@ -77,7 +100,11 @@ class SettingsPage extends StatelessWidget {
             title: AppLocalizations.of(context)!.data,
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => DataPage()),
+              MaterialPageRoute(
+                  builder: (context) => DataPage(
+                        initialData: settingsProvider.data,
+                        onDataChanged: settingsProvider.setData,
+                      )),
             ),
           ),
           SettingsTile(

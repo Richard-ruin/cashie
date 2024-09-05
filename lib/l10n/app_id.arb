@@ -23,6 +23,7 @@
   "darkTheme": "Tema Gelap",
   "system": "Sistem",
   "colorScheme": "Skema Warna",
+  "calculator":"Kalkulator",
   "@appLanguage": {
     "description": "Judul untuk halaman pemilihan bahasa"
   },

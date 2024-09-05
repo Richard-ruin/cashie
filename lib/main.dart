@@ -5,13 +5,14 @@ import 'package:cashie/providers/language_provider.dart';
 import 'package:cashie/providers/theme_provider.dart';
 import 'package:cashie/pages/cashier/cashier.dart';
 import 'package:cashie/pages/items/items.dart';
-import 'package:cashie/pages/history/history.dart';
+import 'package:cashie/pages/calculator/calculator.dart';
 import 'package:cashie/pages/statistics/statistics.dart';
 import 'package:cashie/pages/settings/settings.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:cashie/l10n/l10n.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:cashie/providers/settings_page_provider.dart';
 
 import 'curved_navigation_bar.dart';
 import 'splash_screen.dart';
@@ -19,13 +20,16 @@ import 'splash_screen.dart';
 void main() async {
   // Initialize Hive
   await Hive.initFlutter();
-  await Hive.openBox('themeBox');
+  await Hive.openBox(ThemeProvider.themeBoxName);
+  await Hive.openBox(LanguageProvider.languageBoxName);
+  await Hive.openBox(SettingsPageProvider.settingsBoxName);
 
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => LanguageProvider()),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => SettingsPageProvider()),
       ],
       child: MyApp(),
     ),
@@ -75,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _pages = [
     CashierPage(),
     ItemsPage(),
-    HistoryPage(),
+    CalculatorPage(),
     StatisticsPage(),
     SettingsPage(),
   ];
@@ -107,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
             color: isDarkMode ? Colors.white : null,
           ),
           Icon(
-            Icons.history,
+            Icons.calculate,
             size: 30,
             color: isDarkMode ? Colors.white : null,
           ),

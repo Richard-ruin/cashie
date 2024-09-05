@@ -3,7 +3,31 @@ import 'package:provider/provider.dart';
 import 'package:cashie/providers/theme_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class DebtsPage extends StatelessWidget {
+class DebtsPage extends StatefulWidget {
+  final String initialDebts;
+  final Function(String) onDebtsChanged;
+
+  DebtsPage({required this.initialDebts, required this.onDebtsChanged});
+
+  @override
+  _DebtsPageState createState() => _DebtsPageState();
+}
+
+class _DebtsPageState extends State<DebtsPage> {
+  late TextEditingController _debtsController;
+
+  @override
+  void initState() {
+    super.initState();
+    _debtsController = TextEditingController(text: widget.initialDebts);
+  }
+
+  @override
+  void dispose() {
+    _debtsController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,8 +44,9 @@ class DebtsPage extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: Center(
-        child: Text('Halaman Hutang'),
+      body: TextField(
+        controller: _debtsController,
+        onChanged: widget.onDebtsChanged,
       ),
     );
   }
