@@ -10,7 +10,7 @@ class NoteContent extends HiveObject {
   final NoteContentType contentType;
 
   @HiveField(1)
-  final String? text; // Jika tipe konten adalah teks
+  String? text; // Jika tipe konten adalah teks
 
   @HiveField(2)
   final String? imagePath; // Jika tipe konten adalah gambar

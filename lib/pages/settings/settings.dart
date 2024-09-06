@@ -39,11 +39,7 @@ class SettingsPage extends StatelessWidget {
             title: AppLocalizations.of(context)!.notes,
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) => NotesPage(
-                        initialNotes: settingsProvider.notes,
-                        onNotesChanged: settingsProvider.setNotes,
-                      )),
+              MaterialPageRoute(builder: (context) => NotesPage()),
             ),
           ),
           SettingsTile(

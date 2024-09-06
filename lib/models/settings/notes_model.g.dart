@@ -1,10 +1,42 @@
+// notes_model.g.dart
+
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 part of 'notes_model.dart';
 
-// **************************************************************************
-// TypeAdapterGenerator
-// **************************************************************************
+class NoteContentTypeAdapter extends TypeAdapter<NoteContentType> {
+  @override
+  final int typeId = 4;
+
+  @override
+  NoteContentType read(BinaryReader reader) {
+    switch (reader.readByte()) {
+      case 0:
+        return NoteContentType.text;
+      case 1:
+        return NoteContentType.image;
+      case 2:
+        return NoteContentType.drawing;
+      default:
+        return NoteContentType.text;
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, NoteContentType obj) {
+    switch (obj) {
+      case NoteContentType.text:
+        writer.writeByte(0);
+        break;
+      case NoteContentType.image:
+        writer.writeByte(1);
+        break;
+      case NoteContentType.drawing:
+        writer.writeByte(2);
+        break;
+    }
+  }
+}
 
 class NoteContentAdapter extends TypeAdapter<NoteContent> {
   @override
@@ -37,16 +69,6 @@ class NoteContentAdapter extends TypeAdapter<NoteContent> {
       ..writeByte(3)
       ..write(obj.drawingPath);
   }
-
-  @override
-  int get hashCode => typeId.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is NoteContentAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
 }
 
 class NoteAdapter extends TypeAdapter<Note> {
@@ -77,14 +99,4 @@ class NoteAdapter extends TypeAdapter<Note> {
       ..writeByte(2)
       ..write(obj.contents);
   }
-
-  @override
-  int get hashCode => typeId.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is NoteAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
 }

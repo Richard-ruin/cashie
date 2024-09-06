@@ -13,16 +13,21 @@ import 'package:cashie/l10n/l10n.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:cashie/providers/settings_page_provider.dart';
-
+import 'models/settings/notes_model.dart';
 import 'curved_navigation_bar.dart';
 import 'splash_screen.dart';
 
 void main() async {
   // Initialize Hive
   await Hive.initFlutter();
+
+  Hive.registerAdapter(NoteContentTypeAdapter());
+  Hive.registerAdapter(NoteContentAdapter());
+  Hive.registerAdapter(NoteAdapter());
   await Hive.openBox(ThemeProvider.themeBoxName);
   await Hive.openBox(LanguageProvider.languageBoxName);
   await Hive.openBox(SettingsPageProvider.settingsBoxName);
+  await Hive.openBox<Note>('notes');
 
   runApp(
     MultiProvider(
