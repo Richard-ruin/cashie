@@ -6,7 +6,7 @@ import 'package:cashie/pages/settings/membership.dart';
 import 'package:cashie/pages/settings/purchase_order.dart';
 import 'package:cashie/pages/settings/discount.dart';
 import 'package:cashie/pages/settings/debts.dart';
-import 'package:cashie/pages/settings/data.dart';
+import 'package:cashie/pages/settings/Backup.dart';
 import 'package:cashie/pages/settings/language.dart';
 import 'package:cashie/pages/settings/theme.dart';
 import 'package:cashie/pages/settings/about.dart';
@@ -96,11 +96,7 @@ class SettingsPage extends StatelessWidget {
             title: AppLocalizations.of(context)!.data,
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) => DataPage(
-                        initialData: settingsProvider.data,
-                        onDataChanged: settingsProvider.setData,
-                      )),
+              MaterialPageRoute(builder: (context) => BackupPage()),
             ),
           ),
           SettingsTile(

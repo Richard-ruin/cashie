@@ -23,7 +23,6 @@ void main() async {
 
   await Hive.initFlutter();
 
-  Hive.registerAdapter(NoteContentTypeAdapter());
   Hive.registerAdapter(NoteContentAdapter());
   Hive.registerAdapter(NoteAdapter());
   Hive.registerAdapter(ItemAdapter());
@@ -31,7 +30,6 @@ void main() async {
   await Hive.openBox(ThemeProvider.themeBoxName);
   await Hive.openBox(LanguageProvider.languageBoxName);
   await Hive.openBox(SettingsPageProvider.settingsBoxName);
-  await Hive.openBox<Note>('notes');
   await Hive.openBox<Item>('items');
 
   runApp(

@@ -30,6 +30,7 @@ class Item extends HiveObject {
 
   @HiveField(8)
   final double packagedPrice;
+
   Item({
     required this.itemId,
     required this.itemName,
@@ -41,4 +42,32 @@ class Item extends HiveObject {
     required this.itemPrice,
     required this.packagedPrice,
   });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'itemId': itemId,
+      'itemName': itemName,
+      'imagePath': imagePath,
+      'itemType': itemType,
+      'itemCategory': itemCategory,
+      'itemCompany': itemCompany,
+      'capitalPrice': capitalPrice,
+      'itemPrice': itemPrice,
+      'packagedPrice': packagedPrice,
+    };
+  }
+
+  factory Item.fromMap(Map<String, dynamic> map) {
+    return Item(
+      itemId: map['itemId'],
+      itemName: map['itemName'],
+      imagePath: map['imagePath'],
+      itemType: map['itemType'],
+      itemCategory: map['itemCategory'],
+      itemCompany: map['itemCompany'],
+      capitalPrice: map['capitalPrice'],
+      itemPrice: map['itemPrice'],
+      packagedPrice: map['packagedPrice'],
+    );
+  }
 }

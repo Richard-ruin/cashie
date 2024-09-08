@@ -9,11 +9,11 @@ class ItemsService {
   }
 
   static Future<void> updateItem(Item item) async {
-    await item.save();
+    await _box.put(item.itemId, item);
   }
 
   static Future<void> deleteItem(Item item) async {
-    await item.delete();
+    await _box.delete(item.itemId);
   }
 
   static List<Item> getAllItems() {
@@ -37,5 +37,24 @@ class ItemsService {
 
   static List<String> getTypes() {
     return _box.values.map((item) => item.itemType).toSet().toList();
+  }
+
+  static Map<String, dynamic> getItemsData() {
+    final Map<String, dynamic> itemsData = {};
+    for (var i = 0; i < _box.length; i++) {
+      final item = _box.getAt(i);
+      if (item != null) {
+        itemsData[item.itemId] = item.toMap();
+      }
+    }
+    return itemsData;
+  }
+
+  static Future<void> restoreItemsData(Map<String, dynamic> itemsData) async {
+    await _box.clear();
+    itemsData.forEach((key, value) {
+      final item = Item.fromMap(value);
+      _box.put(key, item);
+    });
   }
 }
