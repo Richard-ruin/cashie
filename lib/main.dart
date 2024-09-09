@@ -14,7 +14,7 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:cashie/providers/settings_page_provider.dart';
 import 'models/settings/notes_model.dart';
-import 'curved_navigation_bar.dart';
+import 'navigation_bar.dart';
 import 'splash_screen.dart';
 import 'package:cashie/models/items/items_model.dart';
 
@@ -136,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
         color: isDarkMode ? Color(0xFF2B2B2B) : Colors.white,
         buttonBackgroundColor: isDarkMode ? Color(0xFF424242) : Colors.white,
-        backgroundColor: isDarkMode ? Color(0xFF121212) : Colors.blueAccent,
+        backgroundColor: isDarkMode ? Color(0xFF121212) : Colors.blue,
         onTap: _onItemTapped,
         animationCurve: Curves.easeInOut,
         animationDuration: Duration(milliseconds: 300),

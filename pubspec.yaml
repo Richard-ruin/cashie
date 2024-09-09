@@ -24,6 +24,7 @@ dependencies:
   permission_handler: ^8.3.0
   flutter_sound: ^8.1.9
   flutter_quill: ^2.0.2
+  math_expressions: ^2.6.0
 
 dev_dependencies:
   flutter_test:
