@@ -17,6 +17,8 @@ import 'models/settings/notes_model.dart';
 import 'navigation_bar.dart';
 import 'splash_screen.dart';
 import 'package:cashie/models/items/items_model.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,6 +34,10 @@ void main() async {
   await Hive.openBox(SettingsPageProvider.settingsBoxName);
   await Hive.openBox<Item>('items');
 
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(
     MultiProvider(
       providers: [
@@ -39,19 +45,21 @@ void main() async {
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => SettingsPageProvider()),
       ],
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Consumer2<LanguageProvider, ThemeProvider>(
       builder: (context, languageProvider, themeProvider, _) {
         return MaterialApp(
           title: 'Cashie',
-          localizationsDelegates: [
+          localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
@@ -66,9 +74,9 @@ class MyApp extends StatelessWidget {
             colorScheme: themeProvider.colorScheme,
           ),
           themeMode: themeProvider.themeMode,
-          home: SplashScreen(),
+          home: const SplashScreen(),
           routes: {
-            '/home': (context) => HomeScreen(),
+            '/home': (context) => const HomeScreen(),
           },
         );
       },
@@ -77,6 +85,8 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -85,11 +95,11 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-    CashierPage(),
-    ItemsPage(),
-    CalculatorPage(),
-    StatisticsPage(),
-    SettingsPage(),
+    const CashierPage(),
+    const ItemsPage(),
+    const CalculatorPage(),
+    const StatisticsPage(),
+    const SettingsPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -134,12 +144,13 @@ class _HomeScreenState extends State<HomeScreen> {
             color: isDarkMode ? Colors.white : null,
           ),
         ],
-        color: isDarkMode ? Color(0xFF2B2B2B) : Colors.white,
-        buttonBackgroundColor: isDarkMode ? Color(0xFF424242) : Colors.white,
-        backgroundColor: isDarkMode ? Color(0xFF121212) : Colors.blue,
+        color: isDarkMode ? const Color(0xFF2B2B2B) : Colors.white,
+        buttonBackgroundColor:
+            isDarkMode ? const Color(0xFF424242) : Colors.white,
+        backgroundColor: isDarkMode ? const Color(0xFF121212) : Colors.blue,
         onTap: _onItemTapped,
         animationCurve: Curves.easeInOut,
-        animationDuration: Duration(milliseconds: 300),
+        animationDuration: const Duration(milliseconds: 300),
       ),
     );
   }

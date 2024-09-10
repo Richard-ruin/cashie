@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class PurchaseOrderform extends StatelessWidget {
+  const PurchaseOrderform({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title: Text(
+        title: const Text(
           'Pembelian',
           style: TextStyle(
             fontFamily: 'Roboto',
@@ -17,7 +19,7 @@ class PurchaseOrderform extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text('Halaman Hutang'),
       ),
     );
