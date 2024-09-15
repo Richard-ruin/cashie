@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:cashie/models/items/items_model.dart';
-import 'package:cashie/pages/items/itemsform.dart';
 
 class ItemsTile extends StatelessWidget {
   final Item item;
   final Function(Item) onDelete;
 
-  const ItemsTile({required this.item, required this.onDelete});
+  const ItemsTile({super.key, required this.item, required this.onDelete});
 
   @override
   Widget build(BuildContext context) {
@@ -15,19 +14,19 @@ class ItemsTile extends StatelessWidget {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text('Hapus Item'),
-            content: Text('Apakah Anda yakin ingin menghapus item ini?'),
+            title: const Text('Hapus Item'),
+            content: const Text('Apakah Anda yakin ingin menghapus item ini?'),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text('Batal'),
+                child: const Text('Batal'),
               ),
               TextButton(
                 onPressed: () {
                   onDelete(item);
                   Navigator.pop(context);
                 },
-                child: Text('Hapus'),
+                child: const Text('Hapus'),
               ),
             ],
           ),
@@ -38,12 +37,11 @@ class ItemsTile extends StatelessWidget {
           // Gambar item
           Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              image: DecorationImage(
-                image: AssetImage(item.imagePath),
-                fit: BoxFit.cover,
-              ),
-            ),
+                borderRadius: BorderRadius.circular(8),
+                image: DecorationImage(
+                  image: AssetImage(item.imagePath),
+                  fit: BoxFit.cover,
+                )),
           ),
           // Overlay nama dan harga item di atas gambar
           Positioned(
@@ -51,29 +49,29 @@ class ItemsTile extends StatelessWidget {
             left: 0,
             right: 0,
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(8),
                     bottomRight: Radius.circular(8)),
                 color: Colors.black54, // Background transparan
               ),
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     item.itemName,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: 'Roboto',
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   Text(
                     'Rp ${item.itemPrice.toStringAsFixed(0)}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: 'Roboto',
                       fontSize: 14,
                       color: Colors.white,

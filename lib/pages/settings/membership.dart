@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:cashie/providers/theme_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MembershipPage extends StatefulWidget {
   final String initialMembership;
   final Function(String) onMembershipChanged;
 
-  MembershipPage(
-      {required this.initialMembership, required this.onMembershipChanged});
+  const MembershipPage(
+      {super.key,
+      required this.initialMembership,
+      required this.onMembershipChanged});
 
   @override
   _MembershipPageState createState() => _MembershipPageState();

@@ -1,7 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:cashie/themes/colorscheme/DefaultColorScheme.dart';
 import 'package:cashie/themes/colorscheme/GreenAppleColorScheme.dart';
 
 class ThemeProvider with ChangeNotifier {
@@ -14,7 +12,7 @@ class ThemeProvider with ChangeNotifier {
 
   ThemeProvider()
       : _themeMode = _getSavedThemeMode() ?? ThemeMode.system,
-        _colorScheme = _getSavedColorScheme() ?? ColorScheme.light();
+        _colorScheme = _getSavedColorScheme() ?? const ColorScheme.light();
 
   ThemeMode get themeMode => _themeMode;
   bool get isDarkMode => _themeMode == ThemeMode.dark;
@@ -36,9 +34,9 @@ class ThemeProvider with ChangeNotifier {
     final box = Hive.box(themeBoxName);
     final savedColorScheme = box.get(colorSchemeKey);
     if (savedColorScheme == 'default') {
-      return ColorScheme.light();
+      return const ColorScheme.light();
     } else if (savedColorScheme == 'greenApple') {
-      return ColorScheme.dark(
+      return const ColorScheme.dark(
         primary: GreenColorScheme.primary,
         onPrimary: GreenColorScheme.onPrimary,
         // ...
@@ -59,7 +57,7 @@ class ThemeProvider with ChangeNotifier {
     final box = Hive.box(themeBoxName);
     _colorScheme = scheme;
     await box.put(colorSchemeKey,
-        scheme == ColorScheme.light() ? 'default' : 'greenApple');
+        scheme == const ColorScheme.light() ? 'default' : 'greenApple');
     notifyListeners();
   }
 }

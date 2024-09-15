@@ -6,7 +6,7 @@ import 'package:cashie/pages/settings/membership.dart';
 import 'package:cashie/pages/settings/purchase_order.dart';
 import 'package:cashie/pages/settings/discount.dart';
 import 'package:cashie/pages/settings/debts.dart';
-import 'package:cashie/pages/settings/Backup.dart';
+import 'package:cashie/pages/settings/backup.dart';
 import 'package:cashie/pages/settings/language.dart';
 import 'package:cashie/pages/settings/theme.dart';
 import 'package:cashie/pages/settings/about.dart';
@@ -14,6 +14,8 @@ import 'package:provider/provider.dart';
 import 'package:cashie/providers/settings_page_provider.dart';
 
 class SettingsPage extends StatelessWidget {
+  const SettingsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     final settingsProvider = Provider.of<SettingsPageProvider>(context);
@@ -23,7 +25,7 @@ class SettingsPage extends StatelessWidget {
         backgroundColor: Colors.blue,
         title: Text(
           AppLocalizations.of(context)!.settings,
-          style: TextStyle(
+          style: const TextStyle(
             fontFamily: 'Roboto',
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -39,7 +41,7 @@ class SettingsPage extends StatelessWidget {
             title: AppLocalizations.of(context)!.notes,
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => NotesPage()),
+              MaterialPageRoute(builder: (context) => const NotesPage()),
             ),
           ),
           SettingsTile(
@@ -60,11 +62,7 @@ class SettingsPage extends StatelessWidget {
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => PurchaseOrderPage(
-                        initialPurchaseOrder: settingsProvider.purchaseOrder,
-                        onPurchaseOrderChanged:
-                            settingsProvider.setPurchaseOrder,
-                      )),
+                  builder: (context) => const PurchaseOrderPage()),
             ),
           ),
           SettingsTile(
@@ -104,7 +102,7 @@ class SettingsPage extends StatelessWidget {
             title: AppLocalizations.of(context)!.language,
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => LanguagePage()),
+              MaterialPageRoute(builder: (context) => const LanguagePage()),
             ),
           ),
           SettingsTile(
@@ -112,7 +110,7 @@ class SettingsPage extends StatelessWidget {
             title: AppLocalizations.of(context)!.theme,
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ThemePage()),
+              MaterialPageRoute(builder: (context) => const ThemePage()),
             ),
           ),
           SettingsTile(
@@ -120,7 +118,7 @@ class SettingsPage extends StatelessWidget {
             title: AppLocalizations.of(context)!.about,
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => AboutPage()),
+              MaterialPageRoute(builder: (context) => const AboutPage()),
             ),
           ),
         ],

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:cashie/providers/theme_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AboutPage extends StatelessWidget {
+  const AboutPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,7 +11,7 @@ class AboutPage extends StatelessWidget {
         backgroundColor: Colors.blue,
         title: Text(
           AppLocalizations.of(context)!.about,
-          style: TextStyle(
+          style: const TextStyle(
             fontFamily: 'Roboto',
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -20,7 +20,7 @@ class AboutPage extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

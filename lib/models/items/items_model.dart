@@ -57,17 +57,17 @@ class Item extends HiveObject {
     };
   }
 
-  factory Item.fromMap(Map<String, dynamic> map) {
+  static Item fromMap(Map<String, dynamic> map) {
     return Item(
-      itemId: map['itemId'],
-      itemName: map['itemName'],
-      imagePath: map['imagePath'],
-      itemType: map['itemType'],
-      itemCategory: map['itemCategory'],
-      itemCompany: map['itemCompany'],
-      capitalPrice: map['capitalPrice'],
-      itemPrice: map['itemPrice'],
-      packagedPrice: map['packagedPrice'],
+      itemId: map['itemId'] ?? '',
+      itemName: map['itemName'] ?? '',
+      imagePath: map['imagePath'] ?? '',
+      itemType: map['itemType'] ?? '',
+      itemCategory: map['itemCategory'] ?? '',
+      itemCompany: map['itemCompany'] ?? '',
+      capitalPrice: map['capitalPrice']?.toDouble() ?? 0.0,
+      itemPrice: map['itemPrice']?.toDouble() ?? 0.0,
+      packagedPrice: map['packagedPrice']?.toDouble() ?? 0.0,
     );
   }
 }

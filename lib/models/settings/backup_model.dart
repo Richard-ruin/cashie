@@ -1,6 +1,9 @@
-class BackupModel {
-  final String filePath;
-  final DateTime createdAt;
+class Backup {
+  final String id;
+  final DateTime timestamp;
 
-  BackupModel({required this.filePath, required this.createdAt});
+  Backup({
+    required this.id,
+    required this.timestamp,
+  });
 }

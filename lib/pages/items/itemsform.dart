@@ -8,7 +8,7 @@ import 'package:cashie/services/items/items_service.dart';
 class ItemsForm extends StatefulWidget {
   final Item? item;
 
-  const ItemsForm({this.item});
+  const ItemsForm({super.key, this.item});
 
   @override
   _ItemsFormState createState() => _ItemsFormState();
@@ -38,16 +38,33 @@ class _ItemsFormState extends State<ItemsForm> {
         TextEditingController(text: widget.item?.itemCategory ?? '');
     _companyController =
         TextEditingController(text: widget.item?.itemCompany ?? '');
+
+    // Panggil fungsi _removeLastDigit saat dalam mode edit (jika item tidak null)
     _capitalPriceController = TextEditingController(
-        text: _formatNumber(widget.item?.capitalPrice.toString() ?? ''));
+        text: _removeLastDigit(
+            _formatNumber(widget.item?.capitalPrice.toString() ?? '')));
     _itemPriceController = TextEditingController(
-        text: _formatNumber(widget.item?.itemPrice.toString() ?? ''));
+        text: _removeLastDigit(
+            _formatNumber(widget.item?.itemPrice.toString() ?? '')));
     _packagedPriceController = TextEditingController(
-        text: _formatNumber(widget.item?.packagedPrice.toString() ?? ''));
+        text: _removeLastDigit(
+            _formatNumber(widget.item?.packagedPrice.toString() ?? '')));
 
     _suggestedTypes = ItemsService.getTypes();
     _suggestedCategories = ItemsService.getCategories();
     _suggestedCompanies = ItemsService.getCompanies();
+  }
+
+  // Fungsi untuk menghapus 1 angka dari belakang
+  String _removeLastDigit(String value) {
+    if (value.isEmpty)
+      return value; // Jika string kosong, kembalikan string kosong
+    String unformattedValue = _unformatNumber(value); // Hapus pemisah ribuan
+    if (unformattedValue.length > 1) {
+      return _formatNumber(
+          unformattedValue.substring(0, unformattedValue.length - 1));
+    }
+    return "0"; // Jika hanya 1 digit, ganti dengan 0
   }
 
   @override
@@ -135,7 +152,7 @@ class _ItemsFormState extends State<ItemsForm> {
               children: [
                 TextFormField(
                   controller: _nameController,
-                  decoration: InputDecoration(labelText: 'Nama Item'),
+                  decoration: const InputDecoration(labelText: 'Nama Item'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Mohon masukkan nama item';
@@ -143,7 +160,7 @@ class _ItemsFormState extends State<ItemsForm> {
                     return null;
                   },
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 GestureDetector(
                   onTap: _pickImage,
                   child: Container(
@@ -157,10 +174,10 @@ class _ItemsFormState extends State<ItemsForm> {
                         : widget.item?.imagePath != null
                             ? Image.file(File(widget.item!.imagePath),
                                 fit: BoxFit.cover)
-                            : Icon(Icons.image, size: 100),
+                            : const Icon(Icons.image, size: 100),
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 TextFormField(
                   controller: _typeController,
                   decoration: InputDecoration(
@@ -180,7 +197,7 @@ class _ItemsFormState extends State<ItemsForm> {
                     ),
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 TextFormField(
                   controller: _categoryController,
                   decoration: InputDecoration(
@@ -200,7 +217,7 @@ class _ItemsFormState extends State<ItemsForm> {
                     ),
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 TextFormField(
                   controller: _companyController,
                   decoration: InputDecoration(
@@ -220,10 +237,10 @@ class _ItemsFormState extends State<ItemsForm> {
                     ),
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 TextFormField(
                   controller: _capitalPriceController,
-                  decoration: InputDecoration(labelText: 'Harga Modal'),
+                  decoration: const InputDecoration(labelText: 'Harga Modal'),
                   keyboardType: TextInputType.number,
                   inputFormatters: [
                     ThousandsSeparatorInputFormatter(),
@@ -231,7 +248,7 @@ class _ItemsFormState extends State<ItemsForm> {
                 ),
                 TextFormField(
                   controller: _itemPriceController,
-                  decoration: InputDecoration(labelText: 'Harga Item'),
+                  decoration: const InputDecoration(labelText: 'Harga Item'),
                   keyboardType: TextInputType.number,
                   inputFormatters: [
                     ThousandsSeparatorInputFormatter(),
@@ -239,16 +256,16 @@ class _ItemsFormState extends State<ItemsForm> {
                 ),
                 TextFormField(
                   controller: _packagedPriceController,
-                  decoration: InputDecoration(labelText: 'Harga Paket'),
+                  decoration: const InputDecoration(labelText: 'Harga Paket'),
                   keyboardType: TextInputType.number,
                   inputFormatters: [
                     ThousandsSeparatorInputFormatter(),
                   ],
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: _submitForm,
-                  child: Text('Simpan'),
+                  child: const Text('Simpan'),
                 ),
               ],
             ),

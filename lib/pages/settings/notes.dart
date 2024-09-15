@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:cashie/models/settings/notes_model.dart';
 import 'package:cashie/services/settings/notes_service.dart';
-import 'package:cashie/widgets/settings/notes_tile.dart';
-import 'package:cashie/pages/settings/notes.dart';
 import 'package:cashie/pages/settings/notesform.dart';
-import 'package:cashie/providers/language_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NotesPage extends StatefulWidget {
+  const NotesPage({super.key});
+
   @override
   _NotesPageState createState() => _NotesPageState();
 }
@@ -20,14 +19,14 @@ class _NotesPageState extends State<NotesPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Delete Note'),
-          content: Text('Are you sure you want to delete this note?'),
+          title: const Text('Delete Note'),
+          content: const Text('Are you sure you want to delete this note?'),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
             ),
             TextButton(
               onPressed: () {
@@ -35,7 +34,7 @@ class _NotesPageState extends State<NotesPage> {
                 Navigator.pop(context);
                 setState(() {});
               },
-              child: Text('Delete'),
+              child: const Text('Delete'),
             ),
           ],
         );
@@ -50,7 +49,7 @@ class _NotesPageState extends State<NotesPage> {
         backgroundColor: Colors.blue,
         title: Text(
           AppLocalizations.of(context)!.notes,
-          style: TextStyle(
+          style: const TextStyle(
             fontFamily: 'Roboto',
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -65,7 +64,7 @@ class _NotesPageState extends State<NotesPage> {
           if (snapshot.hasData) {
             final notes = snapshot.data!;
             return GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 1.0,
               ),
@@ -93,9 +92,9 @@ class _NotesPageState extends State<NotesPage> {
               },
             );
           } else if (snapshot.hasError) {
-            return Center(child: Text('Failed to load notes'));
+            return const Center(child: Text('Failed to load notes'));
           } else {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
         },
       ),
@@ -103,10 +102,10 @@ class _NotesPageState extends State<NotesPage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => NotesFormPage()),
+            MaterialPageRoute(builder: (context) => const NotesFormPage()),
           ).then((_) => setState(() {}));
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }

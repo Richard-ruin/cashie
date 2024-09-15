@@ -12,14 +12,14 @@ class ThemeController extends ChangeNotifier {
   void toggleThemeMode() {
     if (_themeMode == ThemeMode.light) {
       _themeMode = ThemeMode.dark;
-      _colorScheme = ColorScheme.dark(
+      _colorScheme = const ColorScheme.dark(
         primary: GreenColorScheme.primary,
         onPrimary: GreenColorScheme.onPrimary,
         // ...
       );
     } else {
       _themeMode = ThemeMode.light;
-      _colorScheme = ColorScheme.light(
+      _colorScheme = const ColorScheme.light(
         primary: DefaultColorScheme.primary,
         onPrimary: DefaultColorScheme.onPrimary,
         // ...

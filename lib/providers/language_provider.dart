@@ -7,7 +7,7 @@ class LanguageProvider extends ChangeNotifier {
 
   Locale _currentLocale;
 
-  LanguageProvider() : _currentLocale = _getSavedLocale() ?? Locale('en');
+  LanguageProvider() : _currentLocale = _getSavedLocale() ?? const Locale('en');
 
   Locale get currentLocale => _currentLocale;
 

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:cashie/services/items/items_service.dart';
 
 class BackupPage extends StatefulWidget {
-  const BackupPage({super.key});
-
   @override
   _BackupPageState createState() => _BackupPageState();
 }
@@ -16,7 +15,7 @@ class _BackupPageState extends State<BackupPage> {
         backgroundColor: Colors.blue,
         title: Text(
           AppLocalizations.of(context)!.data,
-          style: const TextStyle(
+          style: TextStyle(
             fontFamily: 'Roboto',
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -25,17 +24,21 @@ class _BackupPageState extends State<BackupPage> {
         ),
         centerTitle: true,
       ),
-      body: const Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              onPressed: null,
+              onPressed: () {
+                ItemsService.backupItemsToFirebase();
+              },
               child: Text('Create Backup'),
             ),
             SizedBox(height: 16),
             ElevatedButton(
-              onPressed: null,
+              onPressed: () {
+                ItemsService.restoreItemsFromFirebase();
+              },
               child: Text('Restore Backup'),
             ),
           ],

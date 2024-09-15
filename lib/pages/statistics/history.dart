@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
-import 'package:cashie/providers/theme_provider.dart';
 
 class HistoryPage extends StatelessWidget {
+  const HistoryPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,7 +11,7 @@ class HistoryPage extends StatelessWidget {
         backgroundColor: Colors.blue,
         title: Text(
           AppLocalizations.of(context)!.history,
-          style: TextStyle(
+          style: const TextStyle(
             fontFamily: 'Roboto',
             fontSize: 24,
             fontWeight: FontWeight.bold,

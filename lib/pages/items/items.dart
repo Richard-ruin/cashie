@@ -2,10 +2,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:cashie/models/items/items_model.dart';
 import 'package:cashie/services/items/items_service.dart';
-import 'package:cashie/widgets/items/items_tile.dart';
 import 'itemsform.dart';
 
 class ItemsPage extends StatefulWidget {
+  const ItemsPage({super.key});
+
   @override
   _ItemsPageState createState() => _ItemsPageState();
 }
@@ -78,7 +79,7 @@ class _ItemsPageState extends State<ItemsPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title: Text(
+        title: const Text(
           'LIST BARANG',
           style: TextStyle(
             fontFamily: 'Roboto',
@@ -101,21 +102,21 @@ class _ItemsPageState extends State<ItemsPage> {
                     showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
-                        title: Text('Filter'),
+                        title: const Text('Filter'),
                         content: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             DropdownButtonFormField<String>(
                               value: _selectedCategory,
                               items: [
-                                DropdownMenuItem(
-                                  child: Text('All Category'),
+                                const DropdownMenuItem(
                                   value: null,
+                                  child: Text('All Category'),
                                 ),
                                 ...ItemsService.getCategories()
                                     .map((category) => DropdownMenuItem(
-                                          child: Text(category),
                                           value: category,
+                                          child: Text(category),
                                         )),
                               ],
                               onChanged: (value) {
@@ -125,20 +126,20 @@ class _ItemsPageState extends State<ItemsPage> {
                                 _filterItems();
                               },
                               decoration:
-                                  InputDecoration(labelText: 'Kategori'),
+                                  const InputDecoration(labelText: 'Kategori'),
                             ),
-                            SizedBox(height: 16),
+                            const SizedBox(height: 16),
                             DropdownButtonFormField<String>(
                               value: _selectedCompany,
                               items: [
-                                DropdownMenuItem(
-                                  child: Text('All Company'),
+                                const DropdownMenuItem(
                                   value: null,
+                                  child: Text('All Company'),
                                 ),
                                 ...ItemsService.getCompanies()
                                     .map((company) => DropdownMenuItem(
-                                          child: Text(company),
                                           value: company,
+                                          child: Text(company),
                                         )),
                               ],
                               onChanged: (value) {
@@ -147,7 +148,8 @@ class _ItemsPageState extends State<ItemsPage> {
                                 });
                                 _filterItems();
                               },
-                              decoration: InputDecoration(labelText: 'Company'),
+                              decoration:
+                                  const InputDecoration(labelText: 'Company'),
                             ),
                           ],
                         ),
@@ -161,11 +163,11 @@ class _ItemsPageState extends State<ItemsPage> {
                               _filterItems();
                               Navigator.pop(context);
                             },
-                            child: Text('Reset'),
+                            child: const Text('Reset'),
                           ),
                           TextButton(
                             onPressed: () => Navigator.pop(context),
-                            child: Text('Tutup'),
+                            child: const Text('Tutup'),
                           ),
                         ],
                       ),
@@ -176,19 +178,19 @@ class _ItemsPageState extends State<ItemsPage> {
                       color: Colors.blueAccent,
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    padding: EdgeInsets.all(8),
-                    child: Icon(
+                    padding: const EdgeInsets.all(8),
+                    child: const Icon(
                       Icons.tune,
                       color: Colors.white,
                     ),
                   ),
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 // TextField untuk Search
                 Expanded(
                   child: TextField(
                     onChanged: _searchItems,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Search ...',
                       hintStyle: TextStyle(
                         fontFamily: 'Roboto',
@@ -196,7 +198,7 @@ class _ItemsPageState extends State<ItemsPage> {
                       ),
                       border: InputBorder.none,
                     ),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: 'Roboto',
                       fontSize: 18,
                     ),
@@ -207,15 +209,15 @@ class _ItemsPageState extends State<ItemsPage> {
           ),
           // Garis pembatas
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 16),
+            margin: const EdgeInsets.symmetric(horizontal: 16),
             height: 2,
             color: Colors.lightBlueAccent,
           ),
           // Grid View untuk menampilkan item
           Expanded(
             child: GridView.builder(
-              padding: EdgeInsets.all(16),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              padding: const EdgeInsets.all(16),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 0.8,
                 crossAxisSpacing: 10,
@@ -230,20 +232,20 @@ class _ItemsPageState extends State<ItemsPage> {
                     showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
-                        title: Text('Hapus Item'),
-                        content:
-                            Text('Apakah Anda yakin ingin menghapus item ini?'),
+                        title: const Text('Hapus Item'),
+                        content: const Text(
+                            'Apakah Anda yakin ingin menghapus item ini?'),
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.pop(context),
-                            child: Text('Batal'),
+                            child: const Text('Batal'),
                           ),
                           TextButton(
                             onPressed: () {
                               _deleteItem(item);
                               Navigator.pop(context);
                             },
-                            child: Text('Hapus'),
+                            child: const Text('Hapus'),
                           ),
                         ],
                       ),
@@ -267,30 +269,30 @@ class _ItemsPageState extends State<ItemsPage> {
                         left: 0,
                         right: 0,
                         child: Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(8),
                               bottomRight: Radius.circular(8),
                             ),
                             color: Colors.black54,
                           ),
-                          padding: EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(8.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 item.itemName,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontFamily: 'Roboto',
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),
                               ),
-                              SizedBox(height: 4),
+                              const SizedBox(height: 4),
                               Text(
                                 'Rp ${_formatNumber(item.itemPrice.toStringAsFixed(0))}',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontFamily: 'Roboto',
                                   fontSize: 14,
                                   color: Colors.white,
@@ -310,7 +312,7 @@ class _ItemsPageState extends State<ItemsPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _navigateToItemForm,
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }

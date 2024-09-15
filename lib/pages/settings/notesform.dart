@@ -8,7 +8,7 @@ import 'package:image_picker/image_picker.dart';
 class NotesFormPage extends StatefulWidget {
   final Note? note;
 
-  const NotesFormPage({this.note});
+  const NotesFormPage({super.key, this.note});
 
   @override
   _NotesFormPageState createState() => _NotesFormPageState();
@@ -61,7 +61,7 @@ class _NotesFormPageState extends State<NotesFormPage> {
   void _saveNote() async {
     if (_formKey.currentState!.validate()) {
       final note = Note(
-        noteId: widget.note?.noteId ?? Uuid().v4(),
+        noteId: widget.note?.noteId ?? const Uuid().v4(),
         header: _headerController.text,
         contents: _contents,
       );
@@ -77,7 +77,7 @@ class _NotesFormPageState extends State<NotesFormPage> {
         title: Text(widget.note == null ? 'Add Note' : 'Edit Note'),
         actions: [
           IconButton(
-            icon: Icon(Icons.save),
+            icon: const Icon(Icons.save),
             onPressed: _saveNote,
           ),
         ],
@@ -88,7 +88,7 @@ class _NotesFormPageState extends State<NotesFormPage> {
           children: [
             TextFormField(
               controller: _headerController,
-              decoration: InputDecoration(labelText: 'Header'),
+              decoration: const InputDecoration(labelText: 'Header'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter a header';
@@ -107,7 +107,7 @@ class _NotesFormPageState extends State<NotesFormPage> {
                       onChanged: (value) {
                         content.text = value;
                       },
-                      decoration: InputDecoration(labelText: 'Content'),
+                      decoration: const InputDecoration(labelText: 'Content'),
                     );
                   } else if (content.contentType == NoteContentType.image) {
                     return Padding(
@@ -121,7 +121,7 @@ class _NotesFormPageState extends State<NotesFormPage> {
                             fit: BoxFit.cover,
                           ),
                           IconButton(
-                            icon: Icon(Icons.delete),
+                            icon: const Icon(Icons.delete),
                             onPressed: () {
                               setState(() {
                                 _contents.removeAt(index);
@@ -134,7 +134,7 @@ class _NotesFormPageState extends State<NotesFormPage> {
                   } else if (content.contentType == NoteContentType.drawing) {
                     // Tampilan untuk konten gambar yang digambar
                   }
-                  return SizedBox();
+                  return const SizedBox();
                 },
               ),
             ),
@@ -146,15 +146,15 @@ class _NotesFormPageState extends State<NotesFormPage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             IconButton(
-              icon: Icon(Icons.text_fields),
+              icon: const Icon(Icons.text_fields),
               onPressed: _addTextContent,
             ),
             IconButton(
-              icon: Icon(Icons.image),
+              icon: const Icon(Icons.image),
               onPressed: _addImageContent,
             ),
             IconButton(
-              icon: Icon(Icons.brush),
+              icon: const Icon(Icons.brush),
               onPressed: _addDrawingContent,
             ),
           ],

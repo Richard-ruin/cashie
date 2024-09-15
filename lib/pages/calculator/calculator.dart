@@ -3,6 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:math_expressions/math_expressions.dart';
 
 class CalculatorPage extends StatefulWidget {
+  const CalculatorPage({super.key});
+
   @override
   _CalculatorPageState createState() => _CalculatorPageState();
 }
@@ -59,22 +61,22 @@ class _CalculatorPageState extends State<CalculatorPage> {
     }
   }
 
-  // Button widget generator
-  Widget _buildButton(String value, {Color color = Colors.black}) {
+  Widget _buildButton(String value,
+      {Color color = Colors.black, Color backgroundColor = Colors.white}) {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ElevatedButton(
           onPressed: () => _onPressed(value),
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.white,
-            foregroundColor: color,
-            shape: CircleBorder(),
-            padding: EdgeInsets.all(24.0),
+            backgroundColor: value == '=' ? backgroundColor : Colors.white,
+            foregroundColor: value == '=' ? color : color,
+            shape: const CircleBorder(),
+            padding: const EdgeInsets.all(16.0),
           ),
           child: Text(
             value,
-            style: TextStyle(fontSize: 24),
+            style: const TextStyle(fontSize: 20),
           ),
         ),
       ),
@@ -88,7 +90,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
         backgroundColor: Colors.blue,
         title: Text(
           AppLocalizations.of(context)!.calculator,
-          style: TextStyle(
+          style: const TextStyle(
             fontFamily: 'Roboto',
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -97,77 +99,106 @@ class _CalculatorPageState extends State<CalculatorPage> {
         ),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Container(
-              alignment: Alignment.bottomRight,
-              padding: EdgeInsets.all(24.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    _history, // History of last expression (e.g., "5×5")
-                    style: TextStyle(
-                      fontSize: 24,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  Text(
-                    _output, // Current result (e.g., "25")
-                    style: TextStyle(
-                      fontSize: 48,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Column(
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 400),
+          child: Column(
             children: [
-              Row(
-                children: [
-                  _buildButton("AC", color: Colors.blue),
-                  _buildButton("⌫", color: Colors.blue),
-                  _buildButton("%", color: Colors.blue),
-                  _buildButton("÷", color: Colors.blue),
-                ],
+              Expanded(
+                child: Container(
+                  alignment: Alignment.bottomRight,
+                  padding: const EdgeInsets.all(24.0),
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.centerRight,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          _history,
+                          style: const TextStyle(
+                            fontSize: 24,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        Text(
+                          _output,
+                          style: const TextStyle(
+                            fontSize: 48,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
-              Row(
-                children: [
-                  _buildButton("7"),
-                  _buildButton("8"),
-                  _buildButton("9"),
-                  _buildButton("×", color: Colors.blue),
-                ],
+              const Divider(
+                color: Colors.grey,
+                thickness: 1.0,
+                height: 0,
               ),
-              Row(
+              Column(
                 children: [
-                  _buildButton("4"),
-                  _buildButton("5"),
-                  _buildButton("6"),
-                  _buildButton("-", color: Colors.blue),
-                ],
-              ),
-              Row(
-                children: [
-                  _buildButton("1"),
-                  _buildButton("2"),
-                  _buildButton("3"),
-                  _buildButton("+", color: Colors.blue),
-                ],
-              ),
-              Row(
-                children: [
-                  _buildButton("0"),
-                  _buildButton(","),
-                  _buildButton("=", color: Colors.blue),
+                  Row(
+                    children: [
+                      _buildButton("(",
+                          color: const Color.fromARGB(190, 10, 54, 173)),
+                      _buildButton(")",
+                          color: const Color.fromARGB(190, 10, 54, 173)),
+                      _buildButton("%",
+                          color: const Color.fromARGB(190, 10, 54, 173)),
+                      _buildButton("AC",
+                          color: const Color.fromARGB(190, 10, 54, 173)),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      _buildButton("7"),
+                      _buildButton("8"),
+                      _buildButton("9"),
+                      _buildButton("÷",
+                          color: const Color.fromARGB(190, 10, 54, 173)),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      _buildButton("4"),
+                      _buildButton("5"),
+                      _buildButton("6"),
+                      _buildButton("×",
+                          color: const Color.fromARGB(190, 10, 54, 173)),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      _buildButton("1"),
+                      _buildButton("2"),
+                      _buildButton("3"),
+                      _buildButton("-",
+                          color: const Color.fromARGB(190, 10, 54, 173)),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      _buildButton("0"),
+                      _buildButton(","),
+                      _buildButton(
+                        "+",
+                        color: const Color.fromARGB(190, 10, 54, 173),
+                      ),
+                      _buildButton(
+                        "=",
+                        color: Colors.white,
+                        backgroundColor: Colors.blue,
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }

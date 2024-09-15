@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:cashie/providers/theme_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DebtsPage extends StatefulWidget {
   final String initialDebts;
   final Function(String) onDebtsChanged;
 
-  DebtsPage({required this.initialDebts, required this.onDebtsChanged});
+  const DebtsPage(
+      {super.key, required this.initialDebts, required this.onDebtsChanged});
 
   @override
   _DebtsPageState createState() => _DebtsPageState();
@@ -35,7 +34,7 @@ class _DebtsPageState extends State<DebtsPage> {
         backgroundColor: Colors.blue,
         title: Text(
           AppLocalizations.of(context)!.debts,
-          style: TextStyle(
+          style: const TextStyle(
             fontFamily: 'Roboto',
             fontSize: 24,
             fontWeight: FontWeight.bold,
